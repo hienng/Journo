@@ -92,6 +92,8 @@ class Hangul(in: String) extends Symbol("Hangul") with Romanize {
 
     override def romanize(): String = ???
 
+
+    // modification of http://gernot-katzers-spice-pages.com/var/korean_hangul_unicode.html
     def romBlock(input: Char): String = {
         val block = charToInt(input)
         val isHangul = block >= UNICODE_OFFSET && block <= UNICODE_MAX
