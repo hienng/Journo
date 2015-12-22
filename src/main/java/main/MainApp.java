@@ -9,9 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-//
-import model.classes.Symbol;
-import model.classes.Hangul;
 
 public class MainApp extends Application {
     private Stage primaryStage;
@@ -21,10 +18,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        Symbol s = new Symbol("a", 2);
-        Hangul h = new Hangul("test", 3);
-
-        this.primaryStage.setTitle(h.romanize(21,12,1));
+        this.primaryStage.setTitle("Journo");
 
         initRootLayout();
 
