@@ -7,18 +7,24 @@ import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 
 import java.io.*;
-import java.nio.charset.Charset;
+import model.classes.Hangul;
+
+// TODO: OnActionListener / OnChangeListener romanize Korean text as soon as it gets imported
 
 public class TextHangulViewController {
+    private Hangul hangul;
 
     private MainApp mainApp;
 
     @FXML
-    private TextArea textArea;
+    private TextArea textAreaHangul;
+
+    @FXML
+    private TextArea textAreaRomanized;
 
     @FXML
     private void btn_clear() {
-        textArea.clear();
+        textAreaHangul.clear();
     }
 
     @FXML
@@ -27,8 +33,18 @@ public class TextHangulViewController {
 
         try {
             String hangulText = readFile(file);
-            textArea.appendText(hangulText);
+            this.hangul = new Hangul(hangulText);
+            textAreaHangul.appendText(hangulText);
         } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btn_testRomanize() {
+        try {
+            textAreaRomanized.appendText(hangul.romanize());
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

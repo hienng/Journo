@@ -4,11 +4,11 @@ import org.scalatest.FlatSpec
 
 class HangulTest extends FlatSpec {
 
-    def h = new Hangul("231")
     val oh = 50724.toChar
     val ppan = 48740.toChar
+    var sentence: String = List(50724, 48740, 32, 44053, 45224, 49828, 53440, 51068, 10, 44053, 45224, 49828, 53440, 51068).map(u => u.toChar).mkString
     val oppan = oh.toString + ppan.toString
-
+    def h = new Hangul(oppan)
 
     "stringToInt" should "convert a string to a list of ints" in {
         assert(h.stringToInt(oppan) == List(50724, 48740))
@@ -36,6 +36,13 @@ class HangulTest extends FlatSpec {
 
     "romBlock" should "romanize a block" in {
         assert(h.romBlock(oh) == "o")
-        print(h.romBlock(oh))
+    }
+
+    "romanize" should "romanize a string" in {
+        println(sentence)
+        assert(h.romanize() == "obban")
+        val line = new Hangul(sentence)
+        assert(line.romanize() == "obban gangnamseutail" + "\n" + "gangnamseutail")
+        println(line.romanize())
     }
 }

@@ -11,6 +11,8 @@ class Hangul(in: String) extends Symbol("Hangul") with Romanize {
 
     // Hangul are composed of letters, the Jamo 자모, in a systematic way.
     // Use of List instead Arrays, because List are immutable.
+    // TODO: Update JAMO to actual strings, i.e "bb" -> "pp"
+    // TODO: Add McCuneReischauer Transcription Rules
     val lead = List(
         "g" ,           // ᄀ
         "gg",           // ᄁ
@@ -90,8 +92,7 @@ class Hangul(in: String) extends Symbol("Hangul") with Romanize {
 
     override def charToInt(input: Char): Int = input.toInt
 
-    override def romanize(): String = ???
-
+    override def romanize(): String = in.map(c => romBlock(c)).mkString
 
     // modification of http://gernot-katzers-spice-pages.com/var/korean_hangul_unicode.html
     def romBlock(input: Char): String = {
