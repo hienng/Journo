@@ -1,6 +1,6 @@
 # Journo
 Journo is a tool I decided to develop in my free time. 
-Journo is a tool developed for people, who deal with Korean, Japanese or Chinese texts on a daily basis and simplifies work routines.
+Journo is a tool developed for people, who deal with Korean, Japanese or Chinese texts on a daily basis and always wanted to simplify work routines.
 
 ## TODO:
   * Romanization Tool
