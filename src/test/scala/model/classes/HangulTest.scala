@@ -20,17 +20,17 @@ class HangulTest extends FlatSpec {
 
 
     "lead" should "have 19 jamos" in {
-        val leadLength = h.lead.length
+        val leadLength = h.leadRR.length
         assert(leadLength == 19)
     }
 
     "vowels" should "have 21 jamos" in {
-        val vowelLength = h.vowels.length
+        val vowelLength = h.vowelsRR.length
         assert(vowelLength == 21)
     }
 
     "tail" should "have 28 jamos" in {
-        val tailLength = h.tail.length
+        val tailLength = h.tailRR.length
         assert(tailLength == 28)
     }
 
@@ -40,9 +40,9 @@ class HangulTest extends FlatSpec {
 
     "romanize" should "romanize a string" in {
         println(sentence)
-        assert(h.romanize() == "obban")
+        assert(h.romanize() == "oppan")
         val line = new Hangul(sentence)
-        assert(line.romanize() == "obban gangnamseutail" + "\n" + "gangnamseutail")
+        assert(line.romanize() == "oppan gangnamseutail" + "\n" + "gangnamseutail")
         println(line.romanize())
     }
 }
