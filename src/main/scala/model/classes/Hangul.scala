@@ -11,36 +11,37 @@ class Hangul(in: String) extends Symbol("Hangul") with Romanize {
 
     // Hangul are composed of letters, the Jamo 자모, in a systematic way.
     // Use of List instead Arrays, because List are immutable.
-    // TODO: Update JAMO to actual strings, i.e "bb" -> "pp"
+    // Transcription Rules for Revised Romanization
+    // TODO: add Transcription Rules of RR: https://en.wikipedia.org/wiki/Revised_Romanization_of_Korean
     // TODO: Add McCuneReischauer Transcription Rules
-    val lead = List(
+    val leadRR = List(
         "g" ,           // ᄀ
-        "gg",           // ᄁ
+        "kk",           // ᄁ
         "n" ,           // ㄴ
         "d" ,           // ㄷ
-        "dd",           // ㄸ
+        "tt",           // ㄸ
         "r" ,    	    // ᄅ
         "m" ,	        // ᄆ
         "b"	,           // ᄇ
-        "bb",	        // ᄈ
+        "pp",	        // ᄈ
         "s"	,           // ᄉ
         "ss",	        // ᄊ
         ""  ,           // ᄋ
         "j"	,           // ᄌ
         "jj",	        // ᄍ
-        "c"	,           // ᄎ
+        "ch",           // ᄎ
         "k"	,           // ᄏ
         "t"	,           // ᄐ
         "p"	,           // ᄑ
         "h"	            // ᄒ
     )
 
-    val vowels = List(
+    val vowelsRR = List(
     	"a"  ,	        //ᅡ
     	"ae" ,	        //ᅢ
     	"ya" ,	        //ᅣ
     	"yae",	        //ᅤ
-    	"yo" ,	        //ᅥ
+    	"eo" ,	        //ᅥ
     	"e"	 ,          //ᅦ
     	"yeo",	        //ᅧ
     	"ye" ,	        //ᅨ
@@ -50,24 +51,24 @@ class Hangul(in: String) extends Symbol("Hangul") with Romanize {
     	"oe" ,	        //ᅬ
     	"yo" ,	        //ᅭ
     	"u"	 ,          //ᅮ
-    	"weo",	        //ᅯ
+    	"wo",	        //ᅯ
     	"we" ,	        //ᅰ
     	"wi" ,	        //ᅱ
     	"yu" ,	        //ᅲ
     	"eu" ,	        //ᅳ
-    	"wi" ,	        //ᅴ
+    	"ui" ,	        //ᅴ
     	"i"             //ᅵ
     )
 
-    val tail = List(
+    val tailRR = List(
         ""  ,           // empty jamo
-        "g" ,           // ᄀ
-        "gg",           // ᄁ
+        "k" ,           // ᄀ
+        "k" ,           // ᄁ
         "gs",           // ㄳ
         "n" ,           // ㄴ
         "nj",           // ㄵ
         "nh",           // ㄶ
-        "d" ,           // ㄷ
+        "t" ,           // ㄷ
         "l" ,           // ㄹ
         "lg",           // ㄺ
         "lm",           // ㄻ
@@ -77,13 +78,13 @@ class Hangul(in: String) extends Symbol("Hangul") with Romanize {
         "lp",           // ㄿ
         "lh",           // ㅀ
         "m" ,	        // ᄆ
-        "b"	,           // ᄇ
+        "p"	,           // ᄇ
         "bs",           // ㅄ
-        "s"	,           // ᄉ
-        "ss",	        // ᄊ
+        "t"	,           // ᄉ
+        "t",	        // ᄊ
         "ng",           // ㅇ
         "j"	,           // ᄌ
-        "c"	,           // ᄎ
+        "t"	,           // ᄎ
         "k"	,           // ᄏ
         "t"	,           // ᄐ
         "p"	,           // ᄑ
@@ -103,18 +104,18 @@ class Hangul(in: String) extends Symbol("Hangul") with Romanize {
             val codePoint = hangulCodePoint - UNICODE_OFFSET
             var unicodeOffset = codePoint
 
-            val tailOffset = unicodeOffset % tail.length
+            val tailOffset = unicodeOffset % tailRR.length
             unicodeOffset -= tailOffset
-            unicodeOffset /= tail.length
+            unicodeOffset /= tailRR.length
 
-            val vowelOffset = unicodeOffset % vowels.length
+            val vowelOffset = unicodeOffset % vowelsRR.length
             unicodeOffset -= vowelOffset
-            unicodeOffset /= vowels.length
+            unicodeOffset /= vowelsRR.length
 
             val leadOffset = unicodeOffset
 
             // return
-            lead(leadOffset) + vowels(vowelOffset) + tail(tailOffset)
+            leadRR(leadOffset) + vowelsRR(vowelOffset) + tailRR(tailOffset)
         } else {
             // return
             input.toString
